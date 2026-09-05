@@ -77,7 +77,21 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .logo-coin {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-orange);
+            box-shadow: 0 0 10px rgba(255, 85, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-coin {
+            transform: rotate(15deg) scale(1.05);
         }
 
         .logo span {
@@ -344,7 +358,7 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
-            .nav-links { display: none; } /* Add JS mobile menu if needed */
+            .nav-links { display: none; }
             .cta-buttons { flex-direction: column; }
             .btn { width: 100%; justify-content: center; }
         }
@@ -357,7 +371,9 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <i class="fa-solid fa-radiation"></i> Blastonia<span>.com</span>
+                    <!-- Custom Blastonia Coin Icon -->
+                    <img src="icon.jpg" alt="Blastonia Coin" class="logo-coin">
+                    Blastonia<span>.com</span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
@@ -376,11 +392,9 @@
             <p>Experience the ultimate 7 Days to Die overhaul survival server. Custom crafting, increased difficulty, expanded mechanics, and an active community.</p>
             
             <div class="cta-buttons">
-                <!-- Replace # with your direct overhaul download link or Mod Launcher guide link -->
                 <a href="#download" class="btn btn-download">
                     <i class="fa-solid fa-download"></i> Download Overhaul
                 </a>
-                <!-- Replace # with your Discord Invite Link -->
                 <a href="https://discord.gg/" target="_blank" class="btn btn-discord">
                     <i class="fa-brands fa-discord"></i> Join Discord
                 </a>
@@ -497,7 +511,6 @@
                 <h3 style="font-family: var(--font-subheading); font-size: 1.8rem; margin-bottom: 10px;">Blastonia Discord Community</h3>
                 <p style="color: var(--text-muted); margin-bottom: 25px;">Get direct overhaul support, server status updates, and trade with players.</p>
                 
-                <!-- Replace with your Discord invite URL -->
                 <a href="https://discord.gg/" target="_blank" class="btn btn-discord" style="width: 100%; justify-content: center;">
                     Join Discord Server
                 </a>
