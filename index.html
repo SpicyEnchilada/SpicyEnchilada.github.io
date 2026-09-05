@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blastonia | 7 Days to Die Overhaul Server</title>
+    <meta name="description" content="Welcome to Blastonia - Premium 7 Days to Die Overhaul Server. Join our Discord community and download the overhaul mod.">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Rajdhani:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0f1115;
+            --bg-card: #181b22;
+            --bg-card-hover: #222733;
+            --primary-orange: #ff5500;
+            --primary-orange-hover: #ff7722;
+            --discord-blue: #5865F2;
+            --discord-blue-hover: #4752C4;
+            --text-light: #e6e6e6;
+            --text-muted: #9a9eab;
+            --accent-border: #333a4d;
+            --font-heading: 'Teko', sans-serif;
+            --font-subheading: 'Rajdhani', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        header {
+            background: rgba(15, 17, 21, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--accent-border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--primary-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: var(--font-subheading);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 90px;
+            background: linear-gradient(180deg, rgba(15, 17, 21, 0.7) 0%, var(--bg-dark) 100%), 
+                        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 85, 0, 0.4);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 35px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            font-family: var(--font-subheading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-download {
+            background-color: var(--primary-orange);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 85, 0, 0.3);
+        }
+
+        .btn-download:hover {
+            background-color: var(--primary-orange-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 85, 0, 0.5);
+        }
+
+        .btn-discord {
+            background-color: var(--discord-blue);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .btn-discord:hover {
+            background-color: var(--discord-blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+        }
+
+        /* Server Stats Bar */
+        .stats-bar {
+            background-color: var(--bg-card);
+            border: 1px solid var(--accent-border);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-family: var(--font-subheading);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-item p {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        .status-online {
+            color: #00ff88 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff88;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--accent-border);
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background-color: var(--bg-card-hover);
+            transform: translateY(-5px);
+            border-color: var(--primary-orange);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-family: var(--font-subheading);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* How to Join Section */
+        .join-guide {
+            padding: 80px 0;
+            background-color: rgba(24, 27, 34, 0.5);
+            border-top: 1px solid var(--accent-border);
+            border-bottom: 1px solid var(--accent-border);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-orange);
+            position: relative;
+        }
+
+        .step-number {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.15);
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+
+        .step-card h3 {
+            font-family: var(--font-subheading);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--accent-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-top: 10px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-links { display: none; } /* Add JS mobile menu if needed */
+            .cta-buttons { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-radiation"></i> Blastonia<span>.com</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-to-join">How To Join</a></li>
+                    <li><a href="#discord">Discord</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Blastonia</h1>
+            <p>Experience the ultimate 7 Days to Die overhaul survival server. Custom crafting, increased difficulty, expanded mechanics, and an active community.</p>
+            
+            <div class="cta-buttons">
+                <!-- Replace # with your direct overhaul download link or Mod Launcher guide link -->
+                <a href="#download" class="btn btn-download">
+                    <i class="fa-solid fa-download"></i> Download Overhaul
+                </a>
+                <!-- Replace # with your Discord Invite Link -->
+                <a href="https://discord.gg/" target="_blank" class="btn btn-discord">
+                    <i class="fa-brands fa-discord"></i> Join Discord
+                </a>
+            </div>
+
+            <!-- Server Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <h3>Server Status</h3>
+                    <p class="status-online"><span class="status-dot"></span> Online</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Modpack Version</h3>
+                    <p>v1.0 Public</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Server Region</h3>
+                    <p>US East</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Server IP</h3>
+                    <p style="font-size: 1.2rem; margin-top: 12px; color: var(--primary-orange);">play.blastonia.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Server Features</h2>
+                <p>What makes the Blastonia 7D2D experience unique</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-biohazard"></i></div>
+                    <h3>Overhauled Mechanics</h3>
+                    <p>Rebalanced progression, unique class paths, expanded tech trees, and enhanced survival elements.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-hammer"></i></div>
+                    <h3>Expanded Crafting</h3>
+                    <p>Hundreds of new craftable items, custom workbenches, advanced weaponry, and fortified building options.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-skull"></i></div>
+                    <h3>Dynamic Blood Moons</h3>
+                    <p>Custom horde scaling, new mutant zombie types, and challenging end-game boss encounters.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h3>Custom POIs & World</h3>
+                    <p>Handcrafted points of interest, rare loot locations, and vast custom-generated wilderness maps.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>Active Community</h3>
+                    <p>Friendly admins, active player base, regularly scheduled events, and dedicated server support.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Dedicated Hardware</h3>
+                    <p>High-performance dedicated host for minimum latency, high FPS, and smooth multiplayer gameplay.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How To Join Section -->
+    <section class="join-guide" id="how-to-join">
+        <div class="container">
+            <div class="section-title">
+                <h2>How to Join Blastonia</h2>
+                <p>Follow these quick steps to download the overhaul and get playing</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>Join Discord</h3>
+                    <p>Join our official Discord server to get current announcements, server password (if set), and live support.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>Download Mod</h3>
+                    <p>Click the Download Overhaul button above or grab the zip/Mod Launcher link directly from our Discord channel.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>Install Files</h3>
+                    <p>Extract the overhaul files into your <code>7 Days to Die/Mods</code> folder (or use 7D2D Mod Launcher).</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <h3>Connect & Play</h3>
+                    <p>Launch 7D2D (EAC Disabled), search for <strong>Blastonia</strong> in the server browser or connect via IP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discord Community Section -->
+    <section class="features" id="discord">
+        <div class="container" style="text-align: center;">
+            <div class="section-title">
+                <h2>Join Our Discord</h2>
+                <p>Stay connected with the community, report bugs, view changelogs, and team up.</p>
+            </div>
+            
+            <div style="max-width: 500px; margin: 0 auto; background: var(--bg-card); padding: 30px; border-radius: 8px; border: 1px solid var(--accent-border);">
+                <i class="fa-brands fa-discord" style="font-size: 4rem; color: var(--discord-blue); margin-bottom: 15px;"></i>
+                <h3 style="font-family: var(--font-subheading); font-size: 1.8rem; margin-bottom: 10px;">Blastonia Discord Community</h3>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">Get direct overhaul support, server status updates, and trade with players.</p>
+                
+                <!-- Replace with your Discord invite URL -->
+                <a href="https://discord.gg/" target="_blank" class="btn btn-discord" style="width: 100%; justify-content: center;">
+                    Join Discord Server
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Blastonia.com. All rights reserved.</p>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">7 Days to Die is a registered trademark of The Fun Pimps.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
