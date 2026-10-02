@@ -36,29 +36,11 @@
         .nav-links a:hover, .nav-links a.active { color: var(--primary-orange); }
 
         .page-section { padding: 140px 0 80px; flex: 1; }
-        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title { text-align: center; margin-bottom: 40px; }
         .section-title h1 { font-family: var(--font-heading); font-size: 3.8rem; text-transform: uppercase; letter-spacing: 2px; }
         .section-title p { color: var(--text-muted); font-size: 1.2rem; }
 
-        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        
-        .product-card { background: var(--bg-card); border: 1px solid var(--accent-border); border-radius: 8px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; }
-        .product-card:hover { transform: translateY(-5px); border-color: var(--primary-orange); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .product-image-wrap { width: 100%; height: 260px; background-color: #12141a; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-        .product-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .product-card:hover .product-image-wrap img { transform: scale(1.05); }
-
-        .product-details { padding: 20px; display: flex; flex-direction: column; flex: 1; }
-        .product-title { font-family: var(--font-subheading); font-size: 1.4rem; text-transform: uppercase; color: #fff; margin-bottom: 8px; }
-        .product-description { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; flex: 1; line-height: 1.4; }
-        
-        .product-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 15px; border-top: 1px solid var(--accent-border); }
-        .product-price { font-family: var(--font-heading); font-size: 1.8rem; color: var(--primary-orange); }
-        
-        .btn-buy { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background-color: var(--primary-orange); color: #fff; font-family: var(--font-subheading); font-weight: 700; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.3s ease; }
-        .btn-buy:hover { background-color: var(--primary-orange-hover); }
-
-        .loading-text { text-align: center; color: var(--text-muted); font-size: 1.2rem; grid-column: 1 / -1; padding: 40px; }
+        .store-wrapper { background: var(--bg-card); border: 1px solid var(--accent-border); border-radius: 12px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
         footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--accent-border); color: var(--text-muted); font-size: 0.9rem; }
     </style>
@@ -88,14 +70,12 @@
         <div class="container">
             <div class="section-title">
                 <h1>Official Merch Store</h1>
-                <p>Gear up with official Blastonia apparel, mugs, and survival accessories.</p>
+                <p>Gear up with official Blastonia apparel and survival accessories.</p>
             </div>
 
-            <div class="store-grid" id="product-container">
-                <div class="loading-text">
-                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-orange); margin-bottom: 10px;"></i>
-                    <p>Loading Store Items...</p>
-                </div>
+            <div class="store-wrapper">
+                <!-- Shopify Collection Embed -->
+                <div id='collection-component-1790969603738'></div>
             </div>
         </div>
     </section>
@@ -106,81 +86,180 @@
         </div>
     </footer>
 
-    <script>
-        // Set this URL to point to your backend proxy serverless endpoint
-        // Example: 'https://api.blastonia.com/get-printify-products' or 'https://your-worker.workers.dev/products'
-        const API_ENDPOINT = ''; 
-
-        // Sample fallback products if API endpoint is not set up yet
-        const sampleProducts = [
-            {
-                title: "Blastonia Survivor Hoodie",
-                description: "Heavyweight survival hoodie featuring the official Blastonia emblem.",
-                price: "$45.00",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80",
-                externalUrl: "https://www.patreon.com/Blastoniagaming"
-            },
-            {
-                title: "Blastonia Tactical Cap",
-                description: "Durable embroidered cap built for endless horde nights.",
-                price: "$24.99",
-                image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80",
-                externalUrl: "https://www.patreon.com/Blastoniagaming"
-            },
-            {
-                title: "Blastonia Coffee Mug (15oz)",
-                description: "Start your morning craft session with hot coffee in a custom ceramic mug.",
-                price: "$16.50",
-                image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
-                externalUrl: "https://www.patreon.com/Blastoniagaming"
-            }
-        ];
-
-        async function loadProducts() {
-            const container = document.getElementById('product-container');
-
-            if (API_ENDPOINT) {
-                try {
-                    const response = await fetch(API_ENDPOINT);
-                    const products = await response.json();
-                    renderProducts(products);
-                } catch (err) {
-                    console.error("Failed to load products from Printify API Proxy:", err);
-                    container.innerHTML = `<p class="loading-text">Unable to load live store items right now. Please check back later!</p>`;
+    <!-- Shopify Buy Button Script -->
+    <script type="text/javascript">
+    /*<![CDATA[*/
+    (function () {
+      var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+      if (window.ShopifyBuy) {
+        if (window.ShopifyBuy.UI) {
+          ShopifyBuyInit();
+        } else {
+          loadScript();
+        }
+      } else {
+        loadScript();
+      }
+      function loadScript() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = scriptURL;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+        script.onload = ShopifyBuyInit;
+      }
+      function ShopifyBuyInit() {
+        var client = ShopifyBuy.buildClient({
+          domain: 'jzanun-ru.myshopify.com',
+          storefrontAccessToken: '558bf79e450fbc3251fa852fb8bfb7c0',
+        });
+        ShopifyBuy.UI.onReady(client).then(function (ui) {
+          ui.createComponent('collection', {
+            id: '666730332528',
+            node: document.getElementById('collection-component-1790969603738'),
+            moneyFormat: '%24%7B%7Bamount%7D%7D',
+            options: {
+              "product": {
+                "styles": {
+                  "product": {
+                    "@media (min-width: 601px)": {
+                      "max-width": "calc(25% - 20px)",
+                      "margin-left": "20px",
+                      "margin-bottom": "50px",
+                      "width": "calc(25% - 20px)"
+                    },
+                    "img": {
+                      "height": "calc(100% - 15px)",
+                      "position": "absolute",
+                      "left": "0",
+                      "right": "0",
+                      "top": "0"
+                    },
+                    "imgWrapper": {
+                      "padding-top": "calc(75% + 15px)",
+                      "position": "relative",
+                      "height": "0"
+                    },
+                    "title": {
+                      "color": "#ffffff",
+                      "font-family": "Rajdhani, sans-serif"
+                    },
+                    "price": {
+                      "color": "#ff5500",
+                      "font-family": "Teko, sans-serif",
+                      "font-size": "1.5rem"
+                    }
+                  },
+                  "button": {
+                    "font-weight": "bold",
+                    "font-family": "Rajdhani, sans-serif",
+                    "color": "#ffffff",
+                    "background-color": "#ff5500",
+                    ":hover": {
+                      "color": "#ffffff",
+                      "background-color": "#ff7722"
+                    },
+                    ":focus": {
+                      "background-color": "#ff7722"
+                    }
+                  }
+                },
+                "text": {
+                  "button": "Add to cart"
                 }
-            } else {
-                // Render sample/fallback catalog if endpoint isn't connected yet
-                renderProducts(sampleProducts);
-            }
-        }
-
-        function renderProducts(items) {
-            const container = document.getElementById('product-container');
-            container.innerHTML = '';
-
-            items.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <div class="product-image-wrap">
-                        <img src="${product.image || product.images[0]?.src}" alt="${product.title}">
-                    </div>
-                    <div class="product-details">
-                        <h3 class="product-title">${product.title}</h3>
-                        <p class="product-description">${product.description || ''}</p>
-                        <div class="product-bottom">
-                            <span class="product-price">${product.price || '$' + (product.variants?.[0]?.price / 100).toFixed(2)}</span>
-                            <a href="${product.externalUrl || '#'}" target="_blank" class="btn-buy">
-                                <i class="fa-solid fa-cart-shopping"></i> Buy Now
-                            </a>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', loadProducts);
+              },
+              "productSet": {
+                "styles": {
+                  "products": {
+                    "@media (min-width: 601px)": {
+                      "margin-left": "-20px"
+                    }
+                  }
+                }
+              },
+              "modalProduct": {
+                "contents": {
+                  "img": false,
+                  "imgWithCarousel": true,
+                  "button": false,
+                  "buttonWithQuantity": true
+                },
+                "styles": {
+                  "product": {
+                    "@media (min-width: 601px)": {
+                      "max-width": "100%",
+                      "margin-left": "0px",
+                      "margin-bottom": "0px"
+                    }
+                  },
+                  "button": {
+                    "font-weight": "bold",
+                    "font-family": "Rajdhani, sans-serif",
+                    "color": "#ffffff",
+                    "background-color": "#ff5500",
+                    ":hover": {
+                      "color": "#ffffff",
+                      "background-color": "#ff7722"
+                    },
+                    ":focus": {
+                      "background-color": "#ff7722"
+                    }
+                  }
+                },
+                "text": {
+                  "button": "Add to cart"
+                }
+              },
+              "option": {},
+              "cart": {
+                "styles": {
+                  "button": {
+                    "font-weight": "bold",
+                    "font-family": "Rajdhani, sans-serif",
+                    "color": "#ffffff",
+                    "background-color": "#ff5500",
+                    ":hover": {
+                      "color": "#ffffff",
+                      "background-color": "#ff7722"
+                    },
+                    ":focus": {
+                      "background-color": "#ff7722"
+                    }
+                  }
+                },
+                "text": {
+                  "total": "Subtotal",
+                  "button": "Checkout"
+                }
+              },
+              "toggle": {
+                "styles": {
+                  "toggle": {
+                    "font-weight": "bold",
+                    "background-color": "#ff5500",
+                    ":hover": {
+                      "background-color": "#ff7722"
+                    },
+                    ":focus": {
+                      "background-color": "#ff7722"
+                    }
+                  },
+                  "count": {
+                    "color": "#ffffff",
+                    ":hover": {
+                      "color": "#ffffff"
+                    }
+                  },
+                  "iconPath": {
+                    "fill": "#ffffff"
+                  }
+                }
+              }
+            },
+          });
+        });
+      }
+    })();
+    /*]]>*/
     </script>
 
 </body>
